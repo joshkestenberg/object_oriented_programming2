@@ -1,6 +1,10 @@
 
 class System
 
+  def initialize
+    @bodies = []
+  end
+
   attr_reader(:bodies)
 
   def add(body)
@@ -8,10 +12,9 @@ class System
   end
 
   def total_mass
-    @bodies.each do |body|
-      @mass += @body_mass
-    end
-    @mass =  @total_mass
+    @total_mass = 0
+    @bodies.each {|body| @total_mass += body.mass}
+    puts @total_mass
   end
 
 end
