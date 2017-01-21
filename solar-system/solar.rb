@@ -3,8 +3,9 @@ class System
 
   def initialize
     @bodies = []
-    # @@systems = []
-    # @@mass = 0
+    @total_mass = 0
+    @@universe_mass = []
+    @@super_mass = 0
   end
 
   attr_reader(:bodies)
@@ -17,19 +18,18 @@ class System
       end
     end
     @bodies << new_body
+    @@universe_mass << new_body.mass
   end
 
   def total_mass
-    @total_mass = 0
     @bodies.each {|body| @total_mass += body.mass}
     puts @total_mass
   end
 
-  # def self.mass(system)
-  #   @@systems.each do |system|
-  #     @@mass += system.mass
-  #   end
-  # end
+  def self.super_mass
+    @@universe_mass.each {|body_mass| @@super_mass += body_mass}
+    puts @@super_mass
+  end
 
 end
 
@@ -99,3 +99,18 @@ class Moon < Body
     return @@moons
   end
 end
+
+# $j = System.new
+# $m = System.new
+#
+# $earth = Planet.new("earth",1,1,1)
+# $moon = Moon.new("moon", 1, 1, $earth)
+#
+# $j.add($earth)
+# $j.add($moon)
+#
+# $pluto = Planet.new("pluto",2,1,1)
+# $plutmoon = Moon.new("plutmoon", 2, 1, $pluto)
+#
+# $m.add($pluto)
+# $m.add($plutmoon)
